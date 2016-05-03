@@ -1,0 +1,439 @@
+"3.7 (最終変更: 2015年06月30日 08時55分)
+" vim: ft=vimperator sw=2 sts=2 fdm=marker
+" let {{{
+
+" hints-for-embedded.js
+let g:hints_for_embedded_mode = "e"
+
+" hint-tombloo.js
+let g:hint_tombloo_key='r'
+
+" hints-ext.js
+let use_hints_ext_hinttags=1
+let use_hints_ext_extendedhinttags=1
+let use_hintchars_ex=2
+""autocmd VimperatorEnter ".*" :hi Hint>.x opacity: .6 color:black;
+autocmd VimperatorEnter ".*" :hi -a HintExt color:#b8b8b8 background-color:black;
+
+" }}}
+
+" setting (vimperator) {{{
+
+" 色指定
+colorscheme indigo
+
+" スクロールバー非表示
+set noscrollbars
+
+" Hintモードで使用するキー設定
+set hintchars=asdfghjkl
+
+" 保管候補をTabわ押さなくてもlist表示する
+set autocomplete
+
+"開いたページのinputo要素にfocusを奪われないようにする
+set focuscontent
+
+" ポップアップウインドウを新しいタブで開く
+set popups=tab,resized
+
+" ]] による次のページへの移動で認識するパターン
+set nextpattern=(next|more),^次(へ|の|ペ)?,^続き,→\b,^>$,^(>>|≫)$,^(>|≫),(>|≫)$,^&lt
+set previouspattern=(prev|previous),^前(へ|の|ペ)?,\b←,^<$,^(<<|≪)$,^(<|≪),(<|≪)$,&gt
+" ステータスバー
+set status=tabcount,bookmark,position,input,location
+" }}}
+
+" Mappings (Override) {{{
+"windowsのｺﾋﾟﾍﾟ、切り取り、undo、redo、すべて選択ｼｮｰﾄｶｯﾄｷｰを有効にする
+noremap <C-S-q> <C-z>
+noremap <C-s> <C-c>
+
+inoremap <C-q> <C-v>
+inoremap <C-S-q> <C-z>
+inoremap <C-s> <C-c>
+
+"noremap <C-a> <C-v><C-a>
+"noremap <C-c> <C-v><C-c>
+"noremap <C-v> <C-v><C-v>
+"noremap <C-x> <C-v><C-x>
+noremap <C-z> <C-v><C-z>
+noremap <C-y> <C-v><C-y>
+
+cnoremap <C-a> <C-v><C-a>
+cnoremap <C-c> <C-v><C-c>
+"cnoremap <C-v> <C-v><C-v>
+cnoremap <S-Insert> <C-v><C-v>
+"cnoremap <C-x> <C-v><C-x>
+cnoremap <C-z> <C-v><C-z>
+cnoremap <C-y> <C-v><C-y>
+
+inoremap <C-a> <C-v><C-a>
+"inoremap <C-c> <C-v><C-c>
+"inoremap <C-v> <C-v><C-v>
+inoremap <S-Insert> <C-v><C-v>
+inoremap <C-x> <C-v><C-x>
+inoremap <C-z> <C-v><C-z>
+inoremap <C-y> <C-v><C-y>
+
+" 何時もインプットモードでタブ移動しようとして新しいウィンドウや印刷ウィンドウを開いてしまう
+inoremap <C-p> <ESC><C-p>
+inoremap <C-n> <ESC><C-n>
+
+" 次/前のタブ
+nnoremap <S-j> gt
+nnoremap <S-k> gT
+
+" Ctrl + o/l に戻るや進むを割り当て
+nnoremap <C-o> <A-Left>
+nnoremap <C-l> <A-Right>
+nnoremap <S-h> <A-Left>
+nnoremap <S-l> <A-Right>
+
+" }}}
+
+" Mapping (Site Local) {{{
+
+" 画像
+nnoremap  - urls '\.(jpg|png|gif)$' zi zI
+nnoremap  - urls '\.(jpg|png|gif)$' zo zO
+
+" }}}
+
+" Mappings (Leader) {{{
+
+" 検索補完候補を変える。
+" googleで検索
+nnoremap s :set<Space>complete=s<CR>:tabopen<Space>google<Space>
+
+" 検索サイトを選んで検索
+nnoremap S :set<Space>complete=s<CR>:tabopen<Space>
+
+" Evernoteから検索
+nnoremap e :set<Space>complete=s<CR>:tabopen<Space>ev<Space>
+
+" ブックマークを開く H=はてな
+nnoremap B :set<Space>complete=bH<CR>:tabopen<Space>
+
+" 履歴
+nnoremap H :set<Space>complete=h<CR>:tabopen<Space>
+
+" VisualモードでC-gで選択しているテキストでGoogle検索
+"vmap <silent> <C-g> <C-Insert><Esc><Esc>P
+"vmap <silent> P <C-Insert><Esc><Esc>P
+
+" コピーしたらビジュアルモードを抜ける
+vnoremap <silent> y <C-Insert><Esc><Esc>
+
+" CSS ON/OFF
+nnoremap <silent> ! :set invusermode<CR>
+
+" 親ディレクトリに移動
+nnoremap ^ gu
+
+" リンク文字列をリンク先のURLにする
+nnoremap ,u :js for each(let link in Array.slice(content.document.links)){link.textContent = link.href}<CR>
+
+" RSSfeedに移動
+nnoremap ,rss :pa<Space>f<CR>;o
+
+" アドオン画面を開く
+nnoremap ,ext :dialog<Space>addons<CR>
+" オプション画面
+nnoremap ,pre :dialog<Space>preferences<CR>
+
+" Style をON/OFF
+noremap ,st :stylish turnall<CR>
+
+" :panorama のサブコマンドを入力待ち
+nmap <Leader>pc :<C-u>panorama<Space>
+" タブグループを移動
+nmap <Leader>ps :<C-u>panorama switch<Space>
+" タブグループを新規作成
+nmap <Leader>pa :<C-u>panorama add<Space>
+" タブグループリストを表示
+nmap <Leader>pl :<C-u>panorama list<CR>
+" 現在のタブをタブグループに追加
+nmap <Leader>pp :<C-u>panorama pushtab<Space>
+" 現在のタブグループにタブを追加
+nmap <Leader>pu :<C-u>panorama pulltab<Space>
+" タブグループを削除
+nmap <Leader>pr :<C-u>panorama remove<Space>
+" タブグループビューを開く
+nmap <Leader>po <C-S-e>
+
+" vimperatorrcのリロード
+nmap ,r :source<Space>~/_vimperatorrc<CR>
+
+" Evernoteに送る
+"nmap ,eve :emenu<Space>ツール.Evernote に追加<CR>
+"vmap ,eve :emenu<Space>ツール.Evernote に追加<CR>
+nmap ,eve :emenu<Space>ツール.WebClipper<CR>
+vmap ,eve :emenu<Space>ツール.WebClipper<CR>
+
+" プライベートタブを開く
+map ,p :emenu<Space>ファイル.新しいプライベートタブ<CR>
+
+" applauncher.js アプリ起動ショートカット
+map ,ai :<C-u>runapp<Space>Incognito<CR>
+map ,al :<C-u>runapp<Space>mikurima_後で見る<CR>
+map ,ar :<C-u>runapp<Space>Iron<CR>
+
+" copy.js
+nnoremap ,ca :copy<Space>anchor<CR>
+
+" notscript.js
+" 許可されていれば禁止になり、禁止されていれば許可される
+" javascriptを一時的に許可/禁止にする
+nnoremap ,nt :noscript toggletemp<CR>
+" javascriptを許可/禁止にす
+nnoremap ,np :noscript toggleperm<CR>
+
+" }}}
+
+" Mappings {{{
+
+" 閉じたサイトをリスト表示
+nnoremap U :<C-u>undo<Space>
+
+" タブの場所移動
+nnoremap <C-j> :<C-u>tabmove! +1<CR>
+nnoremap <C-k> :<C-u>tabmove! -1<CR>
+
+" zoom em all
+nnoremap ZI :<C-u>zoomall<Space>+10<CR>
+nnoremap ZO :<C-u>zoomall<Space>-10<CR>
+
+" tab-history.js
+" タブ移動履歴で戻る/進む
+nnoremap < :tabh back<CR>
+nnoremap > :tabh forward<CR>
+
+" }}}
+
+" setting (firefox) {{{
+
+" Firefox更新関連
+" 更新後に表示されるサイトを見ないようにする
+set! app.update.url="about:blan"
+" Firefox更新しない
+set! app.update.enabled=false
+" 自動アップデートしない
+set! app.update.auto=false
+" バックグラウンドサービスを使用しない
+set! app.update.service.enabled=false
+" 検索エンジンの更新をしない
+set! browser.search.update=false
+" アドオンの更新をしない
+set! extensions.update.autoUpdateDefault=false
+set! extensions.update.enabled=false
+
+" 起動時に開くページ
+" 0=空白, 1=ホームページ, 3=前回のタブを復元
+" set! browser.startup.page=3
+
+" タブの閉じるボタンを非表示(デフォルトは1)
+set! browser.tabs.closeButtons=2
+
+" タブ追加アニメーションオフ
+set! browser.tabs.animate=false
+set! browser.panorama.animete_zoom=false
+set! browser.fullscreen.animateUp=0
+
+" 新しいタブを現在のタブの隣に開く(開く=true,最後に開く=false)
+set! browser.tabs.insertRelatedAfterCurrent=false
+
+" 最後のタブを閉じてもWindowが閉じないようにする
+set! browser.tabs.closeWindowWithLastTab=false
+
+" 新規タブをバックグラウンドで開く
+" true=バックグラウンドで開く
+
+autocmd LocationChange .*                               set! browser.tabs.loadDivertedInBackground=false
+autocmd LocationChange www\.google\.(co\.jp|com)/reader set! browser.tabs.loadDivertedInBackground=true
+autocmd LocationChange mail\.google\.(co\.jp|com)/mail  set! browser.tabs.loadDivertedInBackground=true
+autocmd LocationChange reader\.livedoor\.com            set! browser.tabs.loadDivertedInBackground=true
+autocmd LocationChange b\.hatena\.ne\.jp                set! browser.tabs.loadDivertedInBackground=true
+autocmd LocationChange superstart/content/index\.html   set! browser.tabs.loadDivertedInBackground=true
+autocmd LocationChange evernote\.com/Home\.action       set! browser.tabs.loadDivertedInBackground=true
+autocmd LocationChange feedly\.com                      set! browser.tabs.loadDivertedInBackground=true
+autocmd LocationChange tweetdeck\.twitter\.com/         set! browser.tabs.loadDivertedInBackground=true
+
+" 起動時にタブを読み込む数を設定
+"set! browser.sessionstore.max_concurrent_tabs=0
+
+" ピン留めしたタブを(読み込む=false, 読み込まない=true)
+set! browser.sessionstore.restore_pinned_tabs_on_demand=false
+
+"リファラ情報送信の制御
+" デフォルト:2=リンククリック時と画像読み込み時に送信
+" 1=リンククリック時に送信 0=送信しない
+autocmd LocationChange .*                            set! network.http.sendRefererHeader=2
+autocmd LocationChange reader\.livedoor\.com         set! network.http.sendRefererHeader=0
+autocmd LocationChange fastladder\.com/reader        set! network.http.sendRefererHeader=0
+autocmd LocationChange localhost                     set! network.http.sendRefererHeader=0
+autocmd LocationChange 127\.0\.0\.1                  set! network.http.sendRefererHeader=0
+autocmd LocationChange (www|images)\.google\.(co\.jp|com)      set! network.http.sendRefererHeader=0
+autocmd LocationChange del\.icio\.us                 set! network.http.sendRefererHeader=0
+autocmd LocationChange mixi\.jp                      set! network.http.sendRefererHeader=0
+autocmd LocationChange hatena\.ne\.jp                set! network.http.sendRefererHeader=0
+autocmd LocationChange fc2\.com                      set! network.http.sendRefererHeader=0
+autocmd LocationChange feedly\.com                   set! network.http.sendRefererHeader=0
+
+" plugin-container.exe プラグインを読み込んで別途で実行する
+" プラグインを利用したページを閉じてもFirefoxが開いている限り実行され続けるため、
+" メモリが増え続けていくので無効にしておく(無効:true)
+set! dom.ipc.plugins.enabled=false
+"set! dom.ipc.plugins.enabled.npctrl.dll=false
+"set! dom.ipc.plugins.enabled.npqtplugin.dll=false
+"set! dom.ipc.plugins.enabled.npswf32.dll=false
+"set! dom.ipc.plugins.enabled.nptest.dll=false
+
+" キャッシュ設定
+set! browser.cache.disk.capacity=32768
+set! browser.cache.disk.enable=false
+set! browser.cache.memory.capacity=32768
+set! browser.cache.memory.enable=true
+set! browser.cache.memory.max_entry_size=32768
+" キャッシュの確認頻度
+" 0=セッションごとに1回
+" 1=ページを表示するたびに
+" 2=チェックしない
+" 3=ページが期限切れのとき（デフォルト)
+" *一部のWebサービスに支障が出る場合がある<Ctrl>+<F5>で強制再読込すればなおる。
+set! browser.cache.check_doc_frequency=3
+
+" 履歴設定
+set! browser.history_expire_days=0
+set! browser.history_expire_days_min=0
+
+" 通信関連
+" Mozilla Re-Mix: PC性能と回線速度に応じたFirefoxのパフォーマンスチューニング例。
+" http://mozilla-remix.seesaa.net/article/42095188.html
+" 共通設定
+set! network.http.pipelining=true
+set! network.http.proxy.pipelining=true
+set! network.http.pipelining.maxrequests=8
+set! content.notify.backoffcount=5
+set! plugin.expose_full_path=true
+set! ui.submenuDelay=0
+
+" 遅いPC・早いインターネット接続
+set! content.max.tokenizing.time=3000000
+set! content.notify.backoffcount=5
+set! content.notify.interval=1000000
+set! content.ontimer=true
+set! content.switch.threshold=1000000
+set! content.maxtextrun=4095
+set! nglayout.initialpaint.delay=1000
+set! image.mem.min_discard_timeout_ms=10000
+
+" Firefoxの安定高速化 2013
+set! network.http.max-connections=32
+set! network.http.max-connections-per-server=8
+set! network.http.max-persistent-connections-per-server=2
+set! network.dns.disableIPv6=true
+
+" cook設定 2=cookieを保存しない
+set! network.cookie.cookieBehavior=2
+
+" Back/Forward停止
+set! browser.sessionhistory.max_total_viewers=1
+
+" リンクの先読みを停止
+set! network.prefetctch-next=false
+set! network.prefetch-next=false
+
+" 最小化した時にメモリ消費量を減らす
+set! config.trim_on_minimize=true
+
+" アドオンの待ち時間を無効化
+set! security.dialog_enable_delay=0
+
+" アドオンのバージョンチェックを回避
+" set! extensions.checkCompatibility=false
+" set! extensions.checkCompatibility.3.6=false
+" set! extensions.checkCompatibility.3.6b=false
+" set! extensions.checkCompatibility.3.7=false
+" set! extensions.checkCompatibility.3.7a=false
+" set! extensions.checkCompatibility.3.7b=false
+" set! extensions.checkCompatibility.4.0=false
+" set! extensions.checkCompatibility.4.0a=false
+" set! extensions.checkCompatibility.4.0b=false
+" set! extensions.checkCompatibility.5.0=false
+" set! extensions.checkCompatibility.5.0.1=false
+" set! extensions.checkCompatibility.7.0.1=false
+" set! extensions.checkCompatibility.8.1=false
+" set! extensions.checkCompatibility.9.0=false
+" set! extensions.checkCompatibility.9.0.1=false
+" set! extensions.checkCompatibility.17.0.3=false
+
+" 大きい画像を開いたときに自動でリサイズさせない
+set! browser.enable_automatic_image_resizing=false
+
+" ポップアップブロックされるまでの最大タブ数
+set! dom.popup_maximum=100
+
+" JavaScriptのポップアップウィンドウをタブとして開く
+"set! browser.link.open_newwindow.restriction=0
+
+" 最近閉じたタブ保存を使用する
+set! browser.sessionstore.enabled=true
+" 最近閉じたタブ保存数
+set! browser.sessionstore.max_tabs_undo=30
+
+" ウィンドウリサイズを無効化
+set! dom.disable_window_move_resize=true
+
+" ダウンロード関連
+set! browser.download.manager.showWhenStarting=false
+set! browser.download.dir='E:\00work\000000'
+set! browser.download.manager.dir='E:\00work\000000'
+set! browser.download.lastDir='E:\00work\000000'
+" ダウンロード履歴を残さない(0:残さない 1:終了時にクリア 2:クリアしない)
+set! browser.download.manager.retention=1
+" ダウンロードファイルを最近使ったファイルに追加しない
+set! browser.download.manager.addToRecentDocs=false
+
+" ウォームや検索バーに入力した情報を残さない
+set! browser.formfill.enable=false
+
+" 右クリックを禁止させない
+set! nglayout.events.dispatchLeftClickOnly=true
+
+" セッション情報保存間隔を延ばして負担軽減(デフォ：15000)
+set! browser.sessionstore.interval=300000
+set! browser.sessionstore.resume_from_crash=true
+set! browser.sessionstore.enabled=true
+
+" 位置情報通知機能を無効化
+set! geo.enabled=false
+
+" 自動リロード禁止(デフォ：false)
+set! accessibility.blockautorefresh=false
+
+" Hell無効化
+set! loop.enabled=false
+" }}}
+
+"""style {{{
+" コマンドラインのIMEOff
+style -name commandline-ime chrome://* #liberator-commandline-command input {ime-mode: inactive;}
+" }}}
+
+" Command {{{
+
+"オートリロードコマンド
+":autoreload 5 現在のタブを5秒ごとに自動リロード
+":stopautoreload 現在のタブの自動ロリードを停止
+command! -nargs=1 autoreload js liberator.execute('stopautoreload'); let (tab = gBrowser.mCurrentTab) { tab.__autoReloadTimer = setInterval(function () tabs.reload(tab), <args> * 1000) }
+command! stopautoreload js gBrowser.mCurrentTab.__autoReloadTimer && clearInterval(gBrowser.mCurrentTab.__autoReloadTimer);
+" 選択範囲内のリンクを開く
+command! sopen js [liberator.open(a.href, liberator.NEW_BACKGROUND_TAB) for (a in util.evaluateXPath("//a")) if (content.window.getSelection().containsNode(a, true))]
+command! sum echo let (sum=0) (util.readFromClipboard().match(/\d+/g).map(function(s) parseInt(s)).forEach(function(v) sum+=v),sum)
+
+
+" }}}
+" =================================================================================================
+"読み込み完了メッセージ
+"echo "vimperatorrc loaded."

@@ -1,0 +1,166 @@
+" 動画サイト画面拡大 "
+style -name youtube http://www.youtube.com/watch* <<EOM
+  #watch-player {
+    width: 1024px !important;
+    height: 576px !important;
+    left: -50px !important;
+  }
+  #watch-sidebar {
+    top: 500px;
+  }
+EOM
+
+style -name fc2a http://video.fc2.com/a/content* <<EOM
+  #wrap {
+    left: -80px !important;
+  }
+  #container {
+    width: 1024px !important;
+  }
+  #content_ad_head {
+    width: 100% !important;
+  }
+  .__noscriptObjectPatchMe__ {
+    width: 1024px !important;
+    height: 576px !important;
+  }
+  #flv2 embed {
+  	width: 1024px !important;
+	height: 576px !important;
+  }
+  #side_menu {
+    display:none
+  }
+
+EOM
+
+style -name fc2 http://video.fc2.com/content* <<EOM
+  #container {
+    width: 1024px !important;
+  }
+  #content_ad_head {
+    width: 100% !important;
+  }
+  .__noscriptObjectPatchMe__ {
+    width: 1024px !important;
+    height: 576px !important;
+  }
+  #flv2 embed {
+  	width: 1024px !important;
+	height: 576px !important;
+  }
+  #side_menu {
+    display:none
+  }
+EOM
+
+style -name say-move http://say-move.org/comeplay* <<EOM
+  .__noscriptObjectPatchMe__ {
+    width: 1024px !important;
+    height: 576px !important;
+  }
+EOM
+
+style -name xhamster http://xhamster.com/movies/* <<EOM
+  body {
+    width: 1048px !important;
+  }
+  #player {
+    left: -80px !important;
+    height: 576px !important;
+    width: 1024px !important;
+  }
+  #rating_stars {
+    display:none;
+  }
+EOM
+
+style -name youporn http://www.youporn.com/watch/* <<EOM
+  #player {
+    left: -80px !important;
+    height: 576px !important;
+    width: 1024px !important;
+
+  }
+  #mpl {
+    left: -80px !important;
+    height: 576px !important;
+    width: 1024px !important;
+
+  }
+EOM
+
+style -name youku http://v.youku.com/v_show/* <<EOM
+  #player {
+    left: -80px !important;
+    height: 576px !important;
+    width: 1024px !important;
+  }
+  #movie_player {
+    left: -80px !important;
+    height: 576px !important;
+    width: 1024px !important;
+  }
+  .right {
+    top: 500px;
+  }
+EOM
+
+style -name slutload http://www.slutload.com/watch/* <<EOM
+  html, body {
+    width: 1px !important;
+  }
+  #player {
+    left: -80px !important;
+    height: 576px !important;
+    width: 1024px !important;
+  }
+  .under_video { display: none; }
+  .tabs { display: none; }
+  #tab_related_videos { padding-top: 750px !important; }
+  .side_right { display: none; }
+EOM
+
+style -name spankwire http://www.spankwire.com/* <<EOM
+  #wrapper {
+    width: 1048px !important;
+  }
+  object.__noscriptObjectPatchMe__ {
+    width: 1024px !important;
+    height: 576px !important;
+  }
+EOM
+
+style -name keezmovies  http://www.keezmovies.com/video/* <<EOM
+  .show {
+    height: 650px !important;
+    width: 1048px !important;
+  }
+  .__noscriptObjectPatchMe__ {
+    width: 1024px !important;
+    height: 576px !important;
+  }
+  .rating-thumbs { display: none; }
+  .float-right { display: none; }
+  .metadata { display: none; }
+  a.twitter-share-button { display: none; }
+  div.box-corner-wrapper { display: none; }
+EOM
+
+style -name xvideos http://www.xvideos.com/video* <<EOM
+  #flash-player-embed {
+    width: 1024px !important;
+    height: 576px !important;
+  }
+EOM
+
+style -name noktube http://www.nonktube.com/video/* <<EOM
+  #nuevoplayer {
+    width: 1024px !important;
+    height: 576px !important;
+  }
+EOM
+
+style -name motherless http://motherless.com/* <<EOM
+	iframe { display: none; }
+EOM

@@ -1,0 +1,57 @@
+" vim: ft=vimperator sw=2 sts=2 fdm=marker
+
+"" GUI {{{
+set gui=none
+
+" リンク文字を大きくする
+" highlight HintExt font-size: 24px;color:white;background-color:red;font-weight: bold;text-transform: uppercase;border-radius: 2px; padding: 0 2px;
+
+" }}}
+
+" plugins map {{{
+
+" feedSomeKeys_3.js {{{
+command! -nargs=+ autocmd VimperatorEnter .* <args>
+
+" Google Calender
+fmaps -u='www\.google\.com/calendar/' -events=vkeydown c / p j n k t d x w m a q s u
+
+" GMail
+fmaps -u='mail\.google\.com/mail' u k j o p n ` ~ c / q ? x s y e m ! # r <S-r> a <S-a> f <S-n> [ ] { } z . <S-i> <S-u> _ <S-s> + = - gp <S-t> gi gs gt gd ga gc gk *a *n *r *u *s *t
+
+" LDR
+fmaps -u='(fastladder|livedoor)\.com/reader' j k r s a p v c p <Space> <S-Space> u,z q w g
+fmaps -u='http://wiki\.livedoor\.com/matomeru_kun/' j k h l J K x b f g e s r t v
+
+" Twitter
+fmaps -u='^(http|https)://twitter\.com/.*' -events=vkeydown,keypress <S-/> j k <Space> / .
+"fmaps -u='^(http|https)://twitter\.com/.*' -events=vkeydown,keypress f r t m n <Enter> l gh gc ga gr gd gp gf gl gm gs gu gr
+fmaps -u='^(http|https)://twitter\.com/.*' -events=vkeydown,keypress t m n <Enter> l gh gc ga gr gd gp gf gl gm gs gu gr
+
+
+" INSERT
+fmap -modes=i -events=keydown,keypress <C-p> <Up>
+fmap -modes=i -events=keydown,keypress <C-n> <Down>
+
+" google+
+fmaps -u='(https|http)://plus\.google\.com/' -events=vkeydown,keypress j k q
+" tumblr
+fmaps -u='(https|http)://www\.tumblr\.com/dashboard' -events=vkeydown,keypress j k i,<S-r> n L,l<CR>
+
+" brief
+fmaps -u='chrome://brief/content/brief.xul' -events=keydown,keypress <Space> <S-Space> u i <Enter> h m n <A-n> b t a s d
+"
+fmaps -u='chrome://newsfox/content/newsfox.xul' -events=keydown,keypress j k a <S-a> o r
+
+" feedly
+fmaps -u='(http|https)://feedly\.com/' -events=keydown,keypress gm ga gg gl <S-j> <S-k> / r j k n p o,v <S-m> m x t l f <S-v> <S-a> <S-b>
+
+" Remember The Milk
+
+fmaps -u='https?://www\.rememberthemilk\.com/home/' -events=keydown,keypress j k m i c ? G,g S,s Y,y M,m <Del>
+fmaps -u='https?://www\.rememberthemilk\.com/home/' -events=keydown,keypress -p=<Leader> 1 2 3 4 f t h l d r
+
+" TweetDeck
+fmaps -u='https://tweetdeck\.twitter\.com/' -events=keydown,keypress r t F,f n D,d p <Enter> <C-Enter> a ? l,<Right> h,<Left> j,<Down> k,<Up> s <Esc> <BackSpace>
+" }}}
+" }}}
